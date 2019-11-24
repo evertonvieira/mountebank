@@ -158,15 +158,17 @@ const request = (verb, path, json) => {
 };
 
 const updateLinks = () => {
+    
     $('a').off('click');
 
-    $('#imposters a').on('click', () => {
-        const link = $(this),
+    $('#imposters a').on('click', (event) => {
+
+        const link = $(event.target),
             row = link.closest('tr'),
             imposter = (row.attr('id') || '').replace('imposter-', ''),
             url = `/imposters/${imposter}`,
             action = link.attr('class').replace('-icon', '');
-
+            
         switch (action) {
             case 'inspect':
                 request('GET', url);
